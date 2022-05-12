@@ -1,0 +1,13 @@
+steps:   
+  #Run Software Composition Analysis (SCA security scan) using Snyk
+  - name: 'ubuntu'
+    entrypoint: bash
+    args: 
+        - '-c'
+        - |-
+          apt-get update
+          apt-get -y install maven 
+          SNYK_TOKEN=${_SNYK_TOKEN}
+          export SNYK_TOKEN
+          mvn snyk:test -fn 
+    id: Snyk SCA
